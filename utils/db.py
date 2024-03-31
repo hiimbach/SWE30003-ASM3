@@ -54,20 +54,23 @@ class Table():
         self.__db.loc[idx] = row
         self.update_table()
         
+    def get_row(self, idx: int):
+        return self.__db.loc[idx].tolist()
+        
 
 class QueryDB():
     def __init__(self, db_path: str) -> None: 
         db_connection = DBConnection(db_path)
-        self.table_dict = db_connection.table_dict()
+        self.table = db_connection.table_dict()
         self.table_names = db_connection.table_names()
         
-    def query(self, op_type: str, table_name: str, *args):
+    def query(self, op_type: str, table_name: str, *kwargs):
         if op_type == 'add':
-            self.table_dict[table_name].add_row(*args)
+            self.table_dict[table_name].add_row(*kwargs)
         elif op_type == 'delete':
-            self.table_dict[table_name].delete_row(*args)
+            self.table_dict[table_name].delete_row(*kwargs)
         elif op_type == 'modify':
-            self.table_dict[table_name].modify_row(*args)
+            self.table_dict[table_name].modify_row(*kwargs)
         else:
             raise ValueError("Invalid operation type.")
         
