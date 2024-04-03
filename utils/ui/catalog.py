@@ -9,12 +9,12 @@ from features.product import Product
 class CatalogUI(UI):
     def __init__(self, catalog: Catalog) -> None:
         super().__init__()
-        self.page_name = "Catalog"
-        self.catalog = catalog
+        self.__page_name = "Catalog"
+        self.__catalog = catalog
         
         # List of available products
         self.available_products = []
-        for product in self.catalog.products:
+        for product in self.__catalog.products:
             if product.amount > 0:
                 self.available_products.append(product)
         

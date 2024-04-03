@@ -4,15 +4,15 @@ from utils.ui.base import UI
 class ProductUI(UI):
     def __init__(self, product: Product) -> None:
         super().__init__()
-        self.page_name = "Product"
-        self.product = product
+        self.__page_name = "Product"
+        self.__product = product
         
     def description(self):
-        self.print(f"Product: {self.product.name}")
-        self.print(f"Price: {self.product.price}")
-        self.print(f"Category: {self.product.category}")
-        self.print(f"Amount: {self.product.amount}")
-        self.print(f"Description: {self.product.description}")
+        self.print(f"Product: {self.__product.name}", "yellow")
+        self.print(f"Price: {self.__product.price}")
+        self.print(f"Category: {self.__product.category}")
+        self.print(f"Amount: {self.__product.amount}")
+        self.print(f"Description: {self.__product.description}")
         
     def main(self):
         keep = True
@@ -28,7 +28,7 @@ class ProductUI(UI):
                     self.print("Invalid option. Please try again.", color="red")
                     continue
                 
-                if option > 0 and option <= self.product.amount:
+                if option > 0 and option <= self.__product.amount:
                     # NOTE: Add to cart
                     return True
                     

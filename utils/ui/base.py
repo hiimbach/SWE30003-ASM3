@@ -4,10 +4,10 @@ from abc import ABC, abstractmethod
 class UI(ABC):  # Abstract class
     def __init__(self) -> None:
         super().__init__()
-        self.page_name = ""
+        self.__page_name = ""
     
     def display(self):
-        title = f"{'═'*30} {self.page_name} {'═'*30}"
+        title = f"{'═'*30} {self.__page_name} {'═'*30}"
         self.print(title, "blue")
         print()
         
