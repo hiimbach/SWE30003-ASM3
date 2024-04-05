@@ -2,12 +2,12 @@ import termcolor
 from abc import ABC, abstractmethod
 
 class UI(ABC):  # Abstract class
-    def __init__(self) -> None:
+    def __init__(self, page_name="") -> None:
         super().__init__()
-        self.__page_name = ""
+        self.__page_name = page_name
     
-    def display(self):
-        title = f"{'═'*30} {self.__page_name} {'═'*30}"
+    def inform(self):
+        title = f"{'═'*33} {self.__page_name} {'═'*33}"
         self.print(title, "blue")
         print()
         
@@ -15,9 +15,6 @@ class UI(ABC):  # Abstract class
         print()
         self.print("═"*len(title), "blue")
         print()
-        
-        result = self.main()
-        return result
         
         
     
@@ -36,7 +33,7 @@ class UI(ABC):  # Abstract class
         pass
     
     @abstractmethod
-    def main(description):
+    def interact(description):
         pass
     
             
