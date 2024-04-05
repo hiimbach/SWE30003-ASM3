@@ -1,7 +1,5 @@
-from typing import Optional, Union, List, Dict
-from logic.product import Product 
-from logic.db import QueryDB
-from logic.inventory import Inventory
+from typing import Optional, Union, Dict
+from logic import Product, QueryDB, Inventory
 
 
 class Cart():
@@ -38,7 +36,12 @@ class Cart():
         table = self.__query.read('cart', 'result=table')
         
         if product_name in table['product'].values:
-            self.__query.modify('cart', f"table.loc[table['product'] == '{product_name}', 'amount'] += {amount}")
+            current_amount = self.__query.read('cart', f"result = table[table['product'] == '{product_name}']['amount']").values[0]
+            if (current_amount + amount) > 0: 
+                self.__query.modify('cart', f"table.loc[table['product'] == '{product_name}', 'amount'] += {amount}")
+            else:
+                if amount > 0:
+                    self.__query.modify('cart', f"table = table[table['product'] != '{product_name}']")
         else:
             self.__query.modify('cart', f"table.loc[len(table)] = ['{product_name}', {amount}]")
             

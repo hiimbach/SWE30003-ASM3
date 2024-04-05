@@ -21,14 +21,17 @@ class QueryDB():
         self.db_conn = DBConnection(db_path)
         
     def modify(self, table_name: str, query: str):
-        try:
-            table = self.db_conn.table(table_name)
-            exec(query)
-            self.db_conn.update(table_name, table)
-            return True
-        except:
-            return False
+        print(query)
         
+        table = self.db_conn.table(table_name)
+        
+        lcls = locals()
+        exec(query, globals(), lcls)
+        table = lcls['table']
+        
+        print(table)
+        self.db_conn.update(table_name, table)
+
         
     def read(self, table_name: str, query: str):
         table = self.db_conn.table(table_name)

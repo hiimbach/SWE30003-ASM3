@@ -1,6 +1,5 @@
-from utils.ui.base import UI
-from logic.product import Product
-from logic.cart import Cart
+from utils.ui import UI
+from logic import Product
 
 class ProductCatalogUI(UI):
     def __init__(self, product: Product, in_cart_amount) -> None:

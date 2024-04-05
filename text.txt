@@ -1,0 +1,2 @@
+> Choose the product based on the ID, or type Q to quit  
+   > Amount 

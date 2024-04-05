@@ -1,6 +1,5 @@
 from typing import Union
-from logic.product import Product
-from logic.db import QueryDB
+from logic import Product, QueryDB
 
 
 class Inventory:

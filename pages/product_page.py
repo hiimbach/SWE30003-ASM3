@@ -1,12 +1,10 @@
-from utils.ui.product import ProductCatalogUI
-from logic.product import Product
-from logic.cart import Cart
+from utils.ui import ProductCatalogUI
+from logic import Product, Cart
 
 class ProductPage:
     def __init__(self, product: Product, in_cart: int) -> None:
         self.__ui = ProductCatalogUI(product, in_cart_amount=in_cart)
         self.__product = product
-        self.__in_cart = in_cart
         self.__cart = Cart()
     
     def run(self):

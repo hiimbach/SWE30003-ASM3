@@ -3,10 +3,9 @@ import sys
 if os.path.abspath(os.getcwd()) not in sys.path:
     sys.path.append(os.path.abspath(os.getcwd()))
 
-from utils.ui.catalog import CatalogUI
-from logic.inventory import Inventory
-from logic.cart import Cart
-from pages.product import ProductPage
+from utils.ui import CatalogUI
+from logic import Inventory, Cart
+from pages import ProductPage
 
 
 class CatalogPage():
@@ -34,7 +33,6 @@ class CatalogPage():
             
             else:
                 keep_running = False
-
                 
 
 if __name__ == "__main__":

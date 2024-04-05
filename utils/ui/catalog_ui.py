@@ -1,10 +1,8 @@
 from tabulate import tabulate
 import os
 
-from utils.ui.base import UI
-from utils.ui.product import ProductCatalogUI
-from logic.inventory import Inventory
-from logic.product import Product
+from utils.ui import UI
+from logic import Inventory
 
 class CatalogUI(UI):
     def __init__(self) -> None:
@@ -49,6 +47,6 @@ class CatalogUI(UI):
                     
                 else:
                     self.print("Invalid option. Please try again.", color="red") 
-        return False
+        return None
                 
         
