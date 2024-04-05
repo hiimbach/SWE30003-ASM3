@@ -7,10 +7,15 @@ from features.catalog import Catalog
 from features.product import Product
 
 class CatalogUI(UI):
-    def __init__(self, catalog: Catalog) -> None:
+    def __init__(self, product: Product) -> None:
         super().__init__()
+<<<<<<< Updated upstream
         self.__page_name = "Catalog"
         self.__catalog = catalog
+=======
+        self.page_name = "In-Cart Product"
+        self.catalog = 
+>>>>>>> Stashed changes
         
         # List of available products
         self.available_products = []
@@ -19,13 +24,10 @@ class CatalogUI(UI):
                 self.available_products.append(product)
         
     def description(self):
-        data = []
-        for i, product in enumerate(self.available_products):
-            data.append({"ID": i+1,
-                        "Product": product.name, 
-                        "Price": product.price, 
-                        "Category": product.category})
-        print(tabulate(data, headers="keys", tablefmt="fancy_grid"))
+        self.print(f"Product: {self.product.name}")
+        self.print(f"Price: {self.product.price}")
+        self.print(f"Amount In cart: {self.amount}")
+        self.print(f"Total Price: {self.total}")
                 
     def main(self):
         keep = True
