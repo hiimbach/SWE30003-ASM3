@@ -1,0 +1,43 @@
+from typing import Union
+from logic.product import Product
+from logic.db import QueryDB
+
+
+class Inventory:
+    def __init__(self) -> None:
+        self.__query = QueryDB("db")   
+        
+    def reduce_amount(self, product: Product, amount: int):
+        if amount == product.amount:
+            self.__query.modify('inventory', f"table = table.drop(table[table['name'] == '{product.name}'].index)")
+        else:
+            self.__query.modify('inventory', f"table.loc[table['name'] == '{product.name}', 'amount'] -= {amount}")
+        
+    def products(self):
+        # product function is used to have up-to-date product list
+        product_list = []
+        
+        table = self.__query.read('inventory', 'result = table')
+        for i in range(len(table)):
+            product_list.append(Product.from_series(table.loc[i]))    
+        return product_list
+    
+    def amount_of(self, product: Union[Product, str]):
+        if isinstance(product, Product):
+            product_name = product.name
+        else:
+            product_name = product
+            
+        amount = self.__query.read('inventory', f"result = table[table['name'] == '{product_name}']['amount']")
+        if len(amount) > 0:
+            return amount.values[0]
+        
+    def price_of(self, product: Union[Product, str]):
+        if isinstance(product, Product):
+            product_name = product.name
+        else:
+            product_name = product
+            
+        price = self.__query.read('inventory', f"result = table[table['name'] == '{product_name}']['price']")
+        if len(price) > 0:
+            return price.values[0]
