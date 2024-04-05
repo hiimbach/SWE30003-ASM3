@@ -4,16 +4,39 @@ if os.path.abspath(os.getcwd()) not in sys.path:
     sys.path.append(os.path.abspath(os.getcwd()))
 
 from utils.ui.catalog import CatalogUI
-from features.catalog import Catalog
-from utils.db import QueryDB
+from logic.inventory import Inventory
+from logic.cart import Cart
+from pages.product import ProductPage
 
 
-db = QueryDB("db")
-product_table = db.table['product']
-catalog = Catalog()
-catalog.construct_from_table(product_table)
+class CatalogPage():
+    def __init__(self) -> None:
+        self.__ui = CatalogUI()
+        self.__inventory = Inventory()
+        self.__cart = Cart()
 
-keep_catalog = True
-while keep_catalog:
-    os.system('clear')
-    keep_catalog = CatalogUI(catalog).display()
+    def run(self):
+        keep_running = True
+        while keep_running:
+            # Show catalog
+            os.system('clear')
+            self.__ui.inform()
+            option = self.__ui.interact()
+            
+            if isinstance(option, int):
+                chosen_product = self.__inventory.products()[option-1]
+                os.system('clear')
+                
+                # Ask user for amount of product
+                in_cart_amount = self.__cart.amount_of(chosen_product)
+                product_page = ProductPage(chosen_product, in_cart_amount)
+                product_page.run()
+            
+            else:
+                keep_running = False
+
+                
+
+if __name__ == "__main__":
+    catalog_page = CatalogPage()
+    catalog_page.run()
