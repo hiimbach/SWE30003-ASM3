@@ -1,4 +1,4 @@
-name, price, amount, catetogy, description
+name,price,amount,category,description
 Apple,0.99,2,Fruit,"Fresh and crunchy apple, rich in fiber and vitamins."
 Spinach,1.49,3,Vegetable,"Nutrient-dense leafy green vegetable, high in iron and antioxidants."
 Quinoa,2.99,4,Grains,"Whole grain quinoa, a good source of protein and fiber."
