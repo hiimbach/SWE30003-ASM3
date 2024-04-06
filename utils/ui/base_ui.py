@@ -1,4 +1,5 @@
 import termcolor
+from typing import List, Union
 from abc import ABC, abstractmethod
 
 class UI(ABC):  # Abstract class
@@ -15,8 +16,6 @@ class UI(ABC):  # Abstract class
         print()
         self.print("═"*len(title), "blue")
         print()
-        
-        
     
     def print(self, text, color=None, tab=0):
         full_text = "   "*tab + text
@@ -36,5 +35,27 @@ class UI(ABC):  # Abstract class
     def interact(description):
         pass
     
-            
-        
+    def get_range(self, range_: Union[int, List], text):
+        keep = True
+        while keep:
+            option = self.get(text=text)
+                
+            if option.lower() == "q":
+                keep = False
+            else:
+                try:
+                    option = int(option)
+                except ValueError:
+                    self.print("Invalid option. Please try again.\n", color="red")
+                    continue
+                if isinstance(range_, int):
+                    number_range = range(1,range_+1)
+                else:
+                    number_range = range(range_[0], range_[1])
+                if option in number_range:
+                    return option
+                    
+                else:
+                    self.print("Invalid option. Please try again.\n", color="red")
+                    
+        return None

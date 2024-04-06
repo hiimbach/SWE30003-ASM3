@@ -16,6 +16,10 @@ class Product:
         
     
     def from_series(series: pd.Series):
-        return Product(series['name'], series['price'], series['amount'], series['category'], series['description'])
+        return Product(series['name'], 
+                       series['price'], 
+                       series['amount'], 
+                       series['category'], 
+                       series['description'])
         
     

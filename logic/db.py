@@ -1,7 +1,4 @@
-from typing import List
-from time import sleep
 import os 
-
 import pandas as pd 
 
 
@@ -21,7 +18,6 @@ class QueryDB():
         self.db_conn = DBConnection(db_path)
         
     def modify(self, table_name: str, query: str):
-        print(query)
         
         table = self.db_conn.table(table_name)
         
@@ -29,7 +25,6 @@ class QueryDB():
         exec(query, globals(), lcls)
         table = lcls['table']
         
-        print(table)
         self.db_conn.update(table_name, table)
 
         

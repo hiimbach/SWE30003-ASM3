@@ -1,11 +1,14 @@
 from typing import Optional, Union, Dict
-from logic import Product, QueryDB, Inventory
+from logic import Product, QueryDB, Inventory, UserManagement
 
 
 class Cart():
     def __init__(self) -> None:
         self.__query = QueryDB("db")
         self.__inventory = Inventory()    
+        self.__user_management = UserManagement()
+        self.__curr_user = self.__user_management.get_current_user()
+        
         
     def current(self) -> Optional[Dict]:
         cart_df = self.__query.read('cart', 'result=table')
@@ -29,30 +32,51 @@ class Cart():
         amount = self.__query.read('cart', f"result = table[table['product'] == '{product_name}']['amount']")
         if len(amount) > 0:
             return amount.values[0]
-            
         
-    def modify_product(self, product: Product, amount: int):
-        product_name = product.name
-        table = self.__query.read('cart', 'result=table')
+    def update(self):
+        # Check if the product still have the sufficient amount in the inventory
+        for row in self.current():
+            product_name = row['Product']
+            amount = row['Amount']
+
+            inven_amount = self.__query.read('inventory', f"result = table[table['name'] == '{product_name}']['amount'].values[0]")
+            
+            if inven_amount < amount:
+                # Update the amount in the cart db
+                self.modify_product(product_name, inven_amount-amount)
+                        
+        
+    def modify_product(self, product: Union[Product, str], amount: int):
+        if isinstance(product, Product):
+            product_name = product.name
+        else:
+            product_name = product
+        
+        user_id = self.__curr_user.user_id
+        table = self.__query.read('cart', f"result=table[table['user_id'] == {user_id}]")
         
         if product_name in table['product'].values:
-            current_amount = self.__query.read('cart', f"result = table[table['product'] == '{product_name}']['amount']").values[0]
+            # import ipdb; ipdb.set_trace()
+            current_amount = self.__query.read('cart', f"result = table[(table['product'] == '{product_name}') & (table['user_id'] == {user_id})]['amount']").values[0]
+            
             if (current_amount + amount) > 0: 
-                self.__query.modify('cart', f"table.loc[table['product'] == '{product_name}', 'amount'] += {amount}")
-            else:
-                if amount > 0:
-                    self.__query.modify('cart', f"table = table[table['product'] != '{product_name}']")
+                self.__query.modify('cart', f"table.loc[(table['product'] == '{product_name}') & (table['user_id'] == {user_id}), 'amount'] += {amount}")
+            elif current_amount + amount == 0:
+                    # import ipdb; ipdb.set_trace()   
+                    self.__query.modify('cart', f"table = table[~((table['product'] == '{product_name}') & (table['user_id'] == {user_id}))]")
         else:
-            self.__query.modify('cart', f"table.loc[len(table)] = ['{product_name}', {amount}]")
+            if amount > 0:
+                self.__query.modify('cart', f"table.loc[len(table)] = ['{product_name}', {amount}, {user_id}]")
             
-            
+
     def check_amount(self, product: Union[Product, str]):
         if isinstance(product, Product):
             product_name = product.name
         else:
             product_name = product
-            
-        amount = self.__query.read('cart', f"result = table[table['product'] == '{product_name}']['amount']")
+        
+        user_id = self.__curr_user.user_id 
+        amount = self.__query.read('cart', f"result = table[(table['product'] == '{product_name}') & (table['user_id'] == {user_id})]['amount']")
         if len(amount) > 0:
             return amount.values[0]
        

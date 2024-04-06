@@ -19,30 +19,16 @@ class ProductCatalogUI(UI):
         
     def interact(self) -> int:
         # Ask user for amount of product
-        keep = True
+        keep = True 
         while keep:
             self.print(f"You are currently having {self.__in_cart} of this product in your cart.", "yellow")
-            option = self.get(text="Type X you want to add more, -X if you want to reduce the amount, or type Q to quit: ")
-                
-            if option.lower() == "q":
-                keep = False
+            option = self.get_range(range_=[-self.__in_cart, self.__product.amount-self.__in_cart],
+                                    text="Type X you want to add more, -X if you want to reduce the amount, or type Q to quit: ")
+            
+            if option == None:
+                return 0
             else:
-                try:
-                    option = int(option)
-                except ValueError:
-                    self.print("Invalid option. Please try again.\n", color="red")
-                    continue
-                
-                total = self.__in_cart + option
-                if total < 0:
-                    self.print("Invalid option. Please try again.", color="red")
-                    continue
-                elif total > self.__product.amount:
-                    self.print("Sorry, we don't have enough product in stock.\n", color="red")
-                    continue
-                else:
-                    return option
-                    
-        return 0
-        
-        
+                return option
+                        
+            
+            

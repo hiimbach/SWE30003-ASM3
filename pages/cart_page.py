@@ -13,21 +13,30 @@ class CartPage:
         self.__inventory = Inventory()  
     
     def run(self):
-        os.system('clear')
-        self.__ui.inform()
-        option = self.__ui.interact()
+        keep_run = True
         
-        if isinstance(option, Product): # Modify Product Amounts
-            chosen_product = self.__inventory.products()[option-1]
+        while keep_run:
             os.system('clear')
-            
-            # Ask user for amount of product
-            in_cart_amount = self.__cart.amount_of(chosen_product)
-            product_page = ProductPage(chosen_product, in_cart_amount)
-            product_page.run()
+            self.__ui.inform()
+            option = self.__ui.interact()
         
-        else:   # Checkout
-            pass
+            if isinstance(option, int): # Modify Product Amount
+                # Chosen product from cart
+                chosen_name = self.__cart.current()[option-1]["Product"]
+                chosen_product = self.__inventory.from_product_name(chosen_name)
+                
+                # Ask user for amount of product
+                in_cart_amount = self.__cart.amount_of(chosen_product)
+                product_page = ProductPage(chosen_product, in_cart_amount)
+                os.system('clear')
+                product_page.run()
+            
+            elif isinstance(option, str):   # Checkout
+                pass
+                keep_run = False
+            
+            else:
+                keep_run = False
 
 
 if __name__ == "__main__":

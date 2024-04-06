@@ -40,3 +40,10 @@ class Inventory:
         price = self.__query.read('inventory', f"result = table[table['name'] == '{product_name}']['price']")
         if len(price) > 0:
             return price.values[0]
+
+    def from_product_name(self, product_name: str):
+        product = self.__query.read('inventory', f"result = table[table['name'] == '{product_name}']")
+        if len(product) > 0:
+            return Product.from_series(product.iloc[0])
+        else:
+            return None

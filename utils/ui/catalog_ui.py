@@ -28,25 +28,8 @@ class CatalogUI(UI):
         print(tabulate(data, headers="keys", tablefmt="fancy_grid"))
                 
     def interact(self):
-        keep = True
-        while keep:
-            option = self.get(text="Choose an product using the number, or type Q to quit: ")
+        option = self.get_range(range_=len(self.__available_products()), 
+                                text="Choose an product using the number, or type Q to quit: ")
                 
-            if option.lower() == "q":
-                keep = False
-            else:
-                try:
-                    option = int(option)
-                except ValueError:
-                    self.print("Invalid option. Please try again.", color="red")
-                    continue
-                
-                available_products = self.__available_products()
-                if option in range(len(available_products)+1):
-                    return option
+        return option
                     
-                else:
-                    self.print("Invalid option. Please try again.", color="red") 
-        return None
-                
-        
