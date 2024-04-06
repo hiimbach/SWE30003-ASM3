@@ -1,0 +1,11 @@
+user_id,name,age,address,phone,email,password,role
+0,Bach,25,Hanoi,555-1234,lenhobach@gmail.com,password123,admin
+1,Jane Smith,30,456 Elm St,555-5678,janesmith@example.com,smithpass,customer
+2,Michael Johnson,40,789 Oak St,555-9012,michaeljohnson@example.com,johnsonpass,customer
+3,Emily Davis,35,101 Pine St,555-3456,emilydavis@example.com,davispw,customer
+4,David Wilson,28,202 Maple St,555-7890,davidwilson@example.com,wilsonpass,customer
+5,Sarah Brown,33,303 Cedar St,555-2345,sarahbrown@example.com,brownpassword,customer
+6,Christopher Lee,45,404 Birch St,555-6789,christopherlee@example.com,leepass,customer
+7,Amy Taylor,27,505 Walnut St,555-0123,amytaylor@example.com,taylorpass,customer
+8,Kevin Martinez,32,606 Pineapple St,555-4567,kevinmartinez@example.com,martinezpass,customer
+9,Laura Anderson,29,707 Peach St,555-8901,lauraanderson@example.com,andersonpw,customer
