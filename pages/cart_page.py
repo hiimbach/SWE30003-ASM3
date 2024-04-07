@@ -3,10 +3,10 @@ import os
 sys.path.append('.')
 
 from utils.ui import CartUI
-from logic import Cart, Product, Inventory
-from pages import ProductPage
+from logic import Cart, Inventory
+from pages import ProductPage, InvoicePage, Page
 
-class CartPage:
+class CartPage(Page):
     def __init__(self) -> None:
         self.__cart = Cart()
         self.__ui = CartUI()
@@ -16,7 +16,6 @@ class CartPage:
         keep_run = True
         
         while keep_run:
-            os.system('clear')
             self.__ui.inform()
             option = self.__ui.interact()
         
@@ -28,11 +27,12 @@ class CartPage:
                 # Ask user for amount of product
                 in_cart_amount = self.__cart.amount_of(chosen_product)
                 product_page = ProductPage(chosen_product, in_cart_amount)
-                os.system('clear')
                 product_page.run()
             
             elif isinstance(option, str):   # Checkout
-                pass
+                # To invoice page
+                invoice_page = InvoicePage()
+                invoice_page.run()
                 keep_run = False
             
             else:

@@ -56,13 +56,11 @@ class Cart():
         table = self.__query.read('cart', f"result=table[table['user_id'] == {user_id}]")
         
         if product_name in table['product'].values:
-            # import ipdb; ipdb.set_trace()
             current_amount = self.__query.read('cart', f"result = table[(table['product'] == '{product_name}') & (table['user_id'] == {user_id})]['amount']").values[0]
             
             if (current_amount + amount) > 0: 
                 self.__query.modify('cart', f"table.loc[(table['product'] == '{product_name}') & (table['user_id'] == {user_id}), 'amount'] += {amount}")
             elif current_amount + amount == 0:
-                    # import ipdb; ipdb.set_trace()   
                     self.__query.modify('cart', f"table = table[~((table['product'] == '{product_name}') & (table['user_id'] == {user_id}))]")
         else:
             if amount > 0:

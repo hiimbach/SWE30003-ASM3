@@ -7,14 +7,24 @@ class CartUI(UI):
     def __init__(self) -> None:
         super().__init__("Cart")
         self.__cart = Cart()
+        self.__user_management = UserManagement()  
+        self.__current_user = self.__user_management.get_current_user()
         
     def description(self):
-        data = self.__cart.current()
-        print(tabulate(data, headers="keys", tablefmt="fancy_grid"))
-        self.print(f"Total: {'{:.2f}'.format(self.__cart.total())}$", color="yellow")
-        self.print("\n*Some products may not be available in the inventory anymore. Please recheck the amount of each product in the Catalog.")
+        if self.__current_user == None:
+            self.print("You are not logged in. Please login to view your cart.")
+            return
+        else:
+            data = self.__cart.current()
+            print(tabulate(data, headers="keys", tablefmt="fancy_grid"))
+            self.print(f"Total: {'{:.2f}'.format(self.__cart.total())}$", color="yellow")
+            self.print("\n*Some products may not be available in the inventory anymore.\nPlease recheck the amount of each product in the Catalog.")
         
     def interact(self):
+        if self.__current_user == None:
+            self.get("Type anything to continue: ")
+            return None
+        
         self.print("1. Modify Product Amounts")
         self.print("2. Checkout")
         

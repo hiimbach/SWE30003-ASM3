@@ -1,10 +1,11 @@
 from utils.ui import UI
-from logic import Product
+from logic import Product, UserManagement
 
 class ProductCatalogUI(UI):
     def __init__(self, product: Product, in_cart_amount) -> None:
         super().__init__("Product")
         self.__product = product
+        self.__user_management = UserManagement()
         if in_cart_amount == None:
             self.__in_cart = 0
         else:
@@ -19,6 +20,12 @@ class ProductCatalogUI(UI):
         
     def interact(self) -> int:
         # Ask user for amount of product
+        curr_user = self.__user_management.get_current_user()
+        if curr_user == None:
+            self.print("You need to login to add product to cart.")
+            self.get("Type enter to continue: ")
+            return 0
+                    
         keep = True 
         while keep:
             self.print(f"You are currently having {self.__in_cart} of this product in your cart.", "yellow")
@@ -30,5 +37,4 @@ class ProductCatalogUI(UI):
             else:
                 return option
                         
-            
             

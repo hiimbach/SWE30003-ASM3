@@ -1,4 +1,5 @@
 import termcolor
+import os
 from typing import List, Union
 from abc import ABC, abstractmethod
 
@@ -8,6 +9,7 @@ class UI(ABC):  # Abstract class
         self.__page_name = page_name
     
     def inform(self):
+        os.system("clear")
         title = f"{'═'*33} {self.__page_name} {'═'*33}"
         self.print(title, "blue")
         print()
@@ -51,7 +53,7 @@ class UI(ABC):  # Abstract class
                 if isinstance(range_, int):
                     number_range = range(1,range_+1)
                 else:
-                    number_range = range(range_[0], range_[1])
+                    number_range = range(range_[0], range_[1]+1)
                 if option in number_range:
                     return option
                     

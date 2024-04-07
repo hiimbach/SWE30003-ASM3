@@ -3,3 +3,7 @@ from utils.ui.cart_ui import CartUI
 from utils.ui.catalog_ui import CatalogUI
 from utils.ui.product_ui import ProductCatalogUI
 from .invoice_ui import InvoiceUI
+from .receipt_ui import ReceiptUI
+from .main_ui import MainUI 
+from .login_ui import LoginUI
+from .register_ui import RegisterUI

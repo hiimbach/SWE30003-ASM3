@@ -3,6 +3,7 @@ import os
 sys.path.append('.')
 
 from logic import Invoice, Inventory, Cart
+from pages import ReceiptPage, Page
 from utils.ui import InvoiceUI
 
 class InvoicePage():
@@ -14,7 +15,6 @@ class InvoicePage():
         
     def run(self):
         self.__cart.update()
-        os.system('clear')
         self.__invoice_ui.inform()
         option = self.__invoice_ui.interact()
         
@@ -24,6 +24,7 @@ class InvoicePage():
             if option == 1:
                 # Confirm invoice
                 cart_info = self.__invoice.cart_info().current()
+                invoice_id = self.__invoice.save_invoice()
                 for item in cart_info:
                     product_name = item['Product']
                     product = self.__inventory.from_product_name(product_name)
@@ -31,8 +32,10 @@ class InvoicePage():
                     self.__inventory.reduce_amount(product, amount)
                     self.__cart.modify_product(product, -amount)
                 
-                self.__invoice.save_invoice()
+                
                 # Move to receipt 
+                receipt_page = ReceiptPage(invoice_id)
+                receipt_page.run()
                 
             else:
                 # Cancel invoice

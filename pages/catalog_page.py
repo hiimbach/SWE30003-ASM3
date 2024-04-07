@@ -5,10 +5,10 @@ if os.path.abspath(os.getcwd()) not in sys.path:
 
 from utils.ui import CatalogUI
 from logic import Inventory, Cart
-from pages import ProductPage
+from pages import ProductPage, Page
 
 
-class CatalogPage():
+class CatalogPage(Page):
     def __init__(self) -> None:
         self.__ui = CatalogUI()
         self.__inventory = Inventory()
@@ -18,13 +18,11 @@ class CatalogPage():
         keep_running = True
         while keep_running:
             # Show catalog
-            os.system('clear')
             self.__ui.inform()
             option = self.__ui.interact()
             
             if isinstance(option, int):
                 chosen_product = self.__inventory.products()[option-1]
-                os.system('clear')
                 
                 # Ask user for amount of product
                 in_cart_amount = self.__cart.amount_of(chosen_product)

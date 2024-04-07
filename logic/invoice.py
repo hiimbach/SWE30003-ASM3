@@ -21,7 +21,7 @@ class Invoice:
         user_id = self.__user.user_id
         cart_info = self.__cart.current()
         
-        invoice_history = self.__query.read('invoice', 'result=table')['invoice_id']
+        invoice_history = self.__query.read('transaction', 'result=table')['invoice_id']
         if len(invoice_history) == 0:
             invoice_id = 1
         else:
@@ -31,9 +31,10 @@ class Invoice:
             prod_name = item['Product']
             amount = item['Amount']
             subtotal = item['Subtotal ($)']
-            # import ipdb; ipdb.set_trace()
             
-            self.__query.modify('invoice', f"table.loc[len(table)] = [{invoice_id}, {user_id}, '{prod_name}', {amount}, {subtotal}, '{formatted_time}']")
+            self.__query.modify('transaction', f"table.loc[len(table)] = [{invoice_id}, {user_id}, '{prod_name}', {amount}, {subtotal}, '{formatted_time}']")
+
+        return invoice_id
 
                 
                 
