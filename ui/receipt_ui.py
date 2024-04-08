@@ -1,5 +1,5 @@
 from logic import Receipt
-from utils.ui import UI
+from ui import UI
 
 class ReceiptUI(UI):
     def __init__(self, receipt: Receipt) -> None:

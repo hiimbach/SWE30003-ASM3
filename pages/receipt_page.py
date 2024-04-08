@@ -1,6 +1,6 @@
 import sys 
 sys.path.append('.')
-from utils.ui import ReceiptUI
+from ui import ReceiptUI
 from pages import Page
 from logic import Receipt
 

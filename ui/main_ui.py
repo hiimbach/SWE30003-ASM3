@@ -1,4 +1,4 @@
-from utils.ui import UI 
+from ui import UI 
 from logic import UserManagement
 
 class MainUI(UI):

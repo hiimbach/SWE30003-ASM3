@@ -4,7 +4,7 @@ sys.path.append('.')
 
 from logic import Invoice, Inventory, Cart
 from pages import ReceiptPage, Page
-from utils.ui import InvoiceUI
+from ui import InvoiceUI
 
 class InvoicePage():
     def __init__(self) -> None:

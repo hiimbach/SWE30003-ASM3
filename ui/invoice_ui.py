@@ -1,4 +1,4 @@
-from utils.ui import UI, CartUI
+from ui import UI, CartUI
 from logic import Invoice, UserManagement
 
 

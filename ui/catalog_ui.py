@@ -1,7 +1,7 @@
 from tabulate import tabulate
 import os
 
-from utils.ui import UI
+from ui import UI
 from logic import Inventory
 
 class CatalogUI(UI):

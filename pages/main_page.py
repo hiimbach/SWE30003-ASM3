@@ -3,7 +3,7 @@ sys.path.append('.')
 
 from pages import CartPage, CatalogPage, LoginPage, RegisterPage, Page
 from logic import Account
-from utils.ui import MainUI
+from ui import MainUI
 
 class MainPage(Page):
     def __init__(self) -> None:

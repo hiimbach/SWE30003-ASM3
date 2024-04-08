@@ -1,7 +1,7 @@
 from tabulate import tabulate
 
 from logic import Cart, Inventory
-from utils.ui import UI
+from ui import UI
 
 class CartUI(UI):
     def __init__(self) -> None:

@@ -1,4 +1,4 @@
-from utils.ui import ProductCatalogUI
+from ui import ProductCatalogUI
 from pages import Page
 from logic import Product, Cart
 

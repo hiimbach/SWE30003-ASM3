@@ -2,7 +2,7 @@ import sys
 sys.path.append('.')
 from logic import Account 
 from pages import Page
-from utils.ui import RegisterUI
+from ui import RegisterUI
 
 class RegisterPage(Page):
     def __init__(self):

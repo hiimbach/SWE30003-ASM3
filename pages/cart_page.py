@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append('.')
 
-from utils.ui import CartUI
+from ui import CartUI
 from logic import Cart, Inventory
 from pages import ProductPage, InvoicePage, Page
 

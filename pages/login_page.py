@@ -1,4 +1,4 @@
-from utils.ui import LoginUI
+from ui import LoginUI
 from pages import Page
 from logic import Account
 

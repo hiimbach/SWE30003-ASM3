@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from utils.ui.base_ui import UI
+from ui.base_ui import UI
 
 class Page(ABC):
     def __init__(self, ui: UI) -> None:

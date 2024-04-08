@@ -1,4 +1,4 @@
-from utils.ui import UI
+from ui import UI
 
 class LoginUI(UI):
     def __init__(self) -> None:

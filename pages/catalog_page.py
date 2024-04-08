@@ -3,7 +3,7 @@ import sys
 if os.path.abspath(os.getcwd()) not in sys.path:
     sys.path.append(os.path.abspath(os.getcwd()))
 
-from utils.ui import CatalogUI
+from ui import CatalogUI
 from logic import Inventory, Cart
 from pages import ProductPage, Page
 
