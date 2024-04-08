@@ -23,16 +23,6 @@ class Cart():
             
         return cart_list
     
-    def amount_of(self, product: Union[Product, str]):
-        if isinstance(product, Product):
-            product_name = product.name
-        else:
-            product_name = product
-            
-        amount = self.__query.read('cart', f"result = table[table['product'] == '{product_name}']['amount']")
-        if len(amount) > 0:
-            return amount.values[0]
-        
     def update(self):
         # Check if the product still have the sufficient amount in the inventory
         for row in self.current():
@@ -67,7 +57,7 @@ class Cart():
                 self.__query.modify('cart', f"table.loc[len(table)] = ['{product_name}', {amount}, {user_id}]")
             
 
-    def check_amount(self, product: Union[Product, str]):
+    def amount_of(self, product: Union[Product, str]):
         if isinstance(product, Product):
             product_name = product.name
         else:
