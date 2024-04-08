@@ -59,7 +59,10 @@ class Cart():
             current_amount = self.__query.read('cart', f"result = table[(table['product'] == '{product_name}') & (table['user_id'] == {user_id})]['amount']").values[0]
             
             if (current_amount + amount) > 0: 
-                self.__query.modify('cart', f"table.loc[(table['product'] == '{product_name}') & (table['user_id'] == {user_id}), 'amount'] += {amount}")
+                if amount > 0:
+                    self.__query.modify('cart', f"table.loc[(table['product'] == '{product_name}') & (table['user_id'] == {user_id}), 'amount'] += {amount}")
+                else:
+                    self.__query.modify('cart', f"table.loc[(table['product'] == '{product_name}') & (table['user_id'] == {user_id}), 'amount'] -= {-amount}")
             elif current_amount + amount == 0:
                     self.__query.modify('cart', f"table = table[~((table['product'] == '{product_name}') & (table['user_id'] == {user_id}))]")
         else:
