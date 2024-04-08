@@ -13,13 +13,15 @@ class LoginPage(Page):
         keep = True
         while keep:
             email, password = self.__ui.interact()
-            result = self.__login.authenticate(email, password)
-            
-            if not result:
-                self.__ui.print("Wrong password or email!\n", "red")
+            if email != None and password != None:
+                result = self.__login.authenticate(email, password)
+                
+                if not result:
+                    self.__ui.print("Wrong password or email!\n", "red")
+                else:
+                    keep = False
             else:
                 keep = False
-        
 
 
 if __name__ == "__main__":
