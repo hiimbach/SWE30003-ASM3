@@ -14,7 +14,7 @@ class ReceiptUI(UI):
         
         self.print("All Your Healthy Food Store confirms your purchase with the following details:", "yellow")
         self.print(f"Name: {name}")
-        self.print(f"Total Money Paid: {total_money}$")
+        self.print(f"Total Money Paid: {'{:.2f}'.format(total_money)}$")
         self.print(f"Transaction Time: {date}")
         self.print("\nThank you for shopping with us!", "yellow")
         
