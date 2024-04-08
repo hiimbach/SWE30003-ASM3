@@ -3,8 +3,11 @@ from abc import ABC, abstractmethod
 from ui.base_ui import UI
 
 class Page(ABC):
-    def __init__(self, ui: UI) -> None:
-        self.__ui = ui
+    '''
+    THIS IS AN INTERFACE. PYTHON DOES NOT HAVE A NATIVE INTERFACE IMPLEMENTATION.
+    '''
+    def __init__(self) -> None:
+        pass
         
     @abstractmethod
     def run(self):

@@ -8,7 +8,8 @@ class CatalogUI(UI):
     def __init__(self) -> None:
         super().__init__("Catalog")
         self.__inventory = Inventory()
-        
+    
+    # Construct a list of available products   
     def __available_products(self):
         # List of available products
         available_products = []

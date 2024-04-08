@@ -7,6 +7,9 @@ class Receipt:
         self.__user_management = UserManagement()
         
     def user_info(self):
+        '''
+        Get the user info
+        '''
         # print(self.__invoice_id)
         invoice_info = self.__query.read('transaction', f"result=table[table['invoice_id'] =={self.__invoice_id}]")
         user_id = invoice_info['user_id'].values[0]
@@ -15,11 +18,17 @@ class Receipt:
         return user_info
     
     def total_money(self):
+        '''
+        Calculate the total money of the invoice
+        '''
         invoice_info = self.__query.read('transaction', f"result=table[table['invoice_id'] =={self.__invoice_id}]")
         all_subtotals = invoice_info['subtotal']
         return sum(all_subtotals)
     
     def transaction_date(self):
+        '''
+        Get the transaction date of the invoice
+        '''
         invoice_info = self.__query.read('transaction', f"result=table[table['invoice_id'] =={self.__invoice_id}]")
         return invoice_info['time'].values[0]
         

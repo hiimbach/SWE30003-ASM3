@@ -22,7 +22,7 @@ class LoginUI(UI):
                     keep = False
 
                 else:
-                    accountCredentials = (email, password)
+                    accountCredentials = (email, password)  # Login credentials
                     return accountCredentials
 
         return (None, None)

@@ -1,5 +1,5 @@
 from ui import UI, CartUI
-from logic import Invoice, UserManagement
+from logic import Invoice
 
 
 class InvoiceUI(UI):

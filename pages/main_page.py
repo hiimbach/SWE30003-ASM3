@@ -25,18 +25,22 @@ class MainPage(Page):
                     login_page.run()
                 
                 elif option == 2:
+                    # To register page
                     register_page = RegisterPage()
                     register_page.run()
                 
                 elif option == 3:
+                    # To catalog page
                     catalog_page = CatalogPage()
                     catalog_page.run()
                     
                 elif option == 4:
+                    # To cart page
                     cart_page = CartPage()
                     cart_page.run()
                     
                 elif option == 5:
+                    # Logout
                     self.__account.logout()
                     
                 else:

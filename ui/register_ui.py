@@ -15,6 +15,7 @@ class RegisterUI(UI):
     def interact(self):
         keep = True
         while keep:
+            # Ask for name
             name = self.get(text="Enter your name or press q to quit: ")
 
             if name.lower() == "q":
@@ -22,6 +23,7 @@ class RegisterUI(UI):
             else:
                 keep_mail = True
                 while keep_mail:
+                    # Ask for email
                     email = self.get(text="Enter your email or press q to quit: ")
                     # Check if email is already in use
                     keep_mail = self.__register.check_email_exist(email)
@@ -33,6 +35,7 @@ class RegisterUI(UI):
                 else:
                     keep_pass = True
                     while keep_pass:
+                        # Ask for password
                         password = self.get(text="Enter your password or press q to quit: ")
                         if password.lower() == "q":
                             keep = False
@@ -45,6 +48,7 @@ class RegisterUI(UI):
                     if password.lower() == "q":
                         keep = False
                     else:
+                        # Ask for phone
                         phone = self.get(text="Enter your phone number or press q to quit: ")
                         
                         if phone.lower() == "q":
@@ -52,6 +56,7 @@ class RegisterUI(UI):
                         else:
                             keep_age = True
                             while keep_age:
+                                # Ask for age
                                 age = self.get(text="Enter your age or press q to quit: ")
                                 if age.lower() == "q":
                                     keep = False
@@ -61,7 +66,8 @@ class RegisterUI(UI):
                                     keep_age = False
                                 except:
                                     self.print("Age should be a number.\n", "red")
-                                    
+                            
+                            # Ask for address
                             address = self.get(text="Enter your address or press q to quit: ")
                             if address.lower() == "q":
                                 keep = False

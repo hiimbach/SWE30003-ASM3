@@ -49,7 +49,3 @@ class UserManagement:
             user_id = int(info)
             return self.get_user_from_id(user_id)
         
-    def write_current_user(self, user_id: int) -> None:
-        with open("db/current_user.txt", "w") as f:
-            f.write(str(user_id))
-        

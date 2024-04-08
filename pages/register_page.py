@@ -12,8 +12,12 @@ class RegisterPage(Page):
     def run(self):
         self.__register_ui.inform()
         account_info = self.__register_ui.interact()
+        
+        # If account_info is None, then the user wants to go back to the main page
         if account_info == None:
             return
+        
+        # If account_info is not None, then the user wants to register
         else:
             name, email, password, phone, age, address = account_info
             self.__register.add_account(name, age, address, phone, email, password)

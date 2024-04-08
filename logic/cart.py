@@ -11,6 +11,10 @@ class Cart():
         
         
     def current(self) -> Optional[Dict]:
+        '''
+        Return the current cart of the user
+        The output is a list of dictionary with the following keys
+        '''
         cart_df = self.__query.read('cart', f"result=table[table['user_id'] == {self.__curr_user.user_id}]")
         cart_list = []
         
@@ -24,6 +28,9 @@ class Cart():
         return cart_list
     
     def update(self):
+        '''
+        If the user A buy a product when it is in the cart of user B, the amount of the product in the cart of user B should be update in case the product does not have enough amount in the inventory
+        '''
         # Check if the product still have the sufficient amount in the inventory
         for row in self.current():
             product_name = row['Product']
@@ -37,27 +44,39 @@ class Cart():
                         
         
     def modify_product(self, product: Union[Product, str], amount: int):
+        '''
+        Modify the amount of the product in the cart
+        '''
         if isinstance(product, Product):
             product_name = product.name
         else:
             product_name = product
         
+        # Get the current user id
         user_id = self.__curr_user.user_id
         table = self.__query.read('cart', f"result=table[table['user_id'] == {user_id}]")
         
+        # Check if the product is in the cart
         if product_name in table['product'].values:
             current_amount = self.__query.read('cart', f"result = table[(table['product'] == '{product_name}') & (table['user_id'] == {user_id})]['amount']").values[0]
             
+            # If the total amount is greater than 0, update the amount in the cart
             if (current_amount + amount) > 0: 
                 self.__query.modify('cart', f"table.loc[(table['product'] == '{product_name}') & (table['user_id'] == {user_id}), 'amount'] += {amount}")
+                
+            # Else remove the product from the cart
             elif current_amount + amount == 0:
                     self.__query.modify('cart', f"table = table[~((table['product'] == '{product_name}') & (table['user_id'] == {user_id}))]")
         else:
+            # Add the product to the cart with the amount
             if amount > 0:
                 self.__query.modify('cart', f"table.loc[len(table)] = ['{product_name}', {amount}, {user_id}]")
             
 
     def amount_of(self, product: Union[Product, str]):
+        '''
+        Check the amount of the product in the cart
+        '''
         if isinstance(product, Product):
             product_name = product.name
         else:
@@ -69,6 +88,10 @@ class Cart():
             return amount.values[0]
        
     def total(self):
+        '''
+        Calculate the total price of the cart
+        
+        '''
         cart = self.current()
         total = 0
         for item in cart:

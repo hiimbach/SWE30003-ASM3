@@ -1,6 +1,6 @@
 from tabulate import tabulate
 
-from logic import Cart, Inventory, UserManagement
+from logic import Cart, UserManagement
 from ui import UI
 
 class CartUI(UI):
