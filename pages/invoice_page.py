@@ -6,7 +6,7 @@ from logic import Invoice, Inventory, Cart
 from pages import ReceiptPage, Page
 from ui import InvoiceUI
 
-class InvoicePage():
+class InvoicePage(Page):
     def __init__(self) -> None:
         self.__invoice_ui = InvoiceUI()
         self.__inventory = Inventory()  
