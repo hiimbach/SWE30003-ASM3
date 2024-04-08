@@ -32,7 +32,6 @@ class InvoicePage(Page):
                     self.__inventory.reduce_amount(product, amount)
                     self.__cart.modify_product(product, -amount)
                 
-                
                 # Move to receipt 
                 receipt_page = ReceiptPage(invoice_id)
                 receipt_page.run()

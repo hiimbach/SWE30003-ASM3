@@ -26,9 +26,3 @@ class LoginUI(UI):
                     return accountCredentials
 
         return (None, None)
-    
-    def announceSuccessful(self):
-        print("You have logged in successfully")
-
-    def announceFailure(self, message):
-        print("Registration unsuccessful: " + message)
