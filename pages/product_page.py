@@ -12,7 +12,7 @@ class ProductPage(Page):
         self.__ui.inform()
         amount_option = self.__ui.interact()
         
-        if amount_option > 0:
+        if amount_option != 0:
             # Add product to cart       
             self.__cart.modify_product(self.__product, amount_option)
                 
