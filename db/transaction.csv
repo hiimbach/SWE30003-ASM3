@@ -8,3 +8,5 @@ invoice_id,user_id,product,amount,subtotal,time
 6,10,Brown Rice,1,1.5,08:18:45 08-04-2024
 7,10,Quinoa,2,5.98,12:08:38 08-04-2024
 7,10,Brown Rice,1,1.5,12:08:38 08-04-2024
+8,11,Grilled Chicken Breast,2,7.98,13:16:08 08-04-2024
+8,11,Brown Rice,3,4.5,13:16:08 08-04-2024

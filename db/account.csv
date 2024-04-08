@@ -10,3 +10,4 @@ user_id,name,age,address,phone,email,password,role
 8,Kevin Martinez,32,606 Pineapple St,555-4567,kevinmartinez@example.com,martinezpass,customer
 9,Laura Anderson,29,707 Peach St,555-8901,lauraanderson@example.com,andersonpw,customer
 10,bach,21,heh,23,bach@mail,asdfasdf,customer
+11,Tuan,21,hanoi,019,tuan@mail,asdfasdf,customer
