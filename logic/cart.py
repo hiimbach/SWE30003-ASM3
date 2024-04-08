@@ -19,7 +19,7 @@ class Cart():
             amount = cart_df.loc[i]['amount']
             price = self.__inventory.price_of(product_name)
             subtotal = amount * price
-            cart_list.append({"Product": product_name, "Amount": amount, "Price ($)": price, "Subtotal ($)": subtotal})
+            cart_list.append({"ID": i+1, "Product": product_name, "Amount": amount, "Price ($)": price, "Subtotal ($)": subtotal})
             
         return cart_list
     
