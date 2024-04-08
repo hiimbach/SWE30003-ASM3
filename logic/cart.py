@@ -11,12 +11,12 @@ class Cart():
         
         
     def current(self) -> Optional[Dict]:
-        cart_df = self.__query.read('cart', 'result=table')
+        cart_df = self.__query.read('cart', f"result=table[table['user_id'] == {self.__curr_user.user_id}]")
         cart_list = []
         
         for i in range(len(cart_df)):
-            product_name = cart_df.loc[i]['product']
-            amount = cart_df.loc[i]['amount']
+            product_name = cart_df.iloc[i]['product']
+            amount = cart_df.iloc[i]['amount']
             price = self.__inventory.price_of(product_name)
             subtotal = amount * price
             cart_list.append({"ID": i+1, "Product": product_name, "Amount": amount, "Price ($)": price, "Subtotal ($)": subtotal})
