@@ -1,4 +1,4 @@
-from logic import User, QueryDB, UserManagement
+from logic import QueryDB, UserManagement
 
 class Receipt:
     def __init__(self, invoice_id) -> None:

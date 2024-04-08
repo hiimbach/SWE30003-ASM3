@@ -1,7 +1,6 @@
 from ui import UI, CartUI
 from logic import Invoice
 
-
 class InvoiceUI(UI):
     def __init__(self) -> None:
         super().__init__("Invoice Details")

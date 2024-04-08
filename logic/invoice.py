@@ -1,5 +1,5 @@
 from datetime import datetime
-from logic import Cart, Product, Inventory, User, QueryDB, UserManagement
+from logic import Cart, QueryDB, UserManagement
 
 class Invoice:
     def __init__(self) -> None:

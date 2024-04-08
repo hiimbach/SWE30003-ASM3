@@ -1,5 +1,4 @@
 from tabulate import tabulate
-import os
 
 from ui import UI
 from logic import Inventory
@@ -9,8 +8,10 @@ class CatalogUI(UI):
         super().__init__("Catalog")
         self.__inventory = Inventory()
     
-    # Construct a list of available products   
     def __available_products(self):
+        '''
+        Construct a list of available products  s
+        '''
         # List of available products
         available_products = []
         for product in self.__inventory.products():
